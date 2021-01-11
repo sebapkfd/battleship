@@ -1,22 +1,22 @@
 const Ship = (size) => {
-    
-    let newArray = Array(4);
-    newArray.length = size;
-    newArray.fill(false);
+
+    const status = Array(size).fill(false)
 
     const hit = (position) => {
-        return 'xd'
+        if(!status[position]) {
+            status[position] = true;
+        }
     }
 
-    const isSunk = (position) => {
-        return 'xd'
+    const isSunk = () => {
+        return !status.includes(false)
     }
 
     const newShip = {
         size,
-        status: newArray,
-        hit: hit,
-        isSunk: isSunk
+        status,
+        hit,
+        isSunk
     }
     
     return newShip;
