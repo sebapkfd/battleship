@@ -10,6 +10,7 @@ const Gameboard = () => { //Only adding horizontally
             isHit: false
         }
     }
+    let ships = [];
 
     const placeShip = (ship, cord) => {
         if(cord%10 === 9 && ship.size > 1) {
@@ -27,12 +28,13 @@ const Gameboard = () => { //Only adding horizontally
             positions[i].occupied = true;
             positions[i].shipPos = i - cord;
         }
-
+        ships.push(ship);
         return true;
     }
 
     const receiveAttack = (cord) => {
         if(!positions[cord].occupied) {
+            positions[cord].isHit = true;
             return false
         }
         else if (positions[cord].occupied) {
@@ -42,10 +44,21 @@ const Gameboard = () => { //Only adding horizontally
         }
     }
     
+    const allSunk = () => {
+        let aux = true;
+        ships.forEach(ship => {
+            if(ship.isSunk() === false){
+                aux = false;
+            }
+        })
+        return aux;
+    }
+
     const board = {
         positions,
         placeShip,
-        receiveAttack
+        receiveAttack,
+        allSunk
     };
 
     return board;

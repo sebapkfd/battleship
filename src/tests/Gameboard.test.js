@@ -34,11 +34,27 @@ test('receiving attacks', () => {
     const firstShip = Ship(1);
     const secondShip = Ship(4);
     testBoard.placeShip(firstShip, 0)
-    testBoard.placeShip(secondShip, 15, secondShip)
+    testBoard.placeShip(secondShip, 15)
     expect(testBoard.receiveAttack(30)).toBe(false);
     expect(testBoard.receiveAttack(0)).toBe(true);
     expect(testBoard.receiveAttack(15)).toBe(true);
     expect(testBoard.positions[15].ship.status[0]).toBe(true);
     expect(testBoard.positions[18].ship.status[0]).toBe(true);
     
+})
+
+test.only('All ships are sunk', () => {
+    const testBoard = Gameboard();
+    const firstShip = Ship(1);
+    const secondShip = Ship(1);
+    const thirdShip = Ship(2);
+    testBoard.placeShip(firstShip, 0);
+    testBoard.placeShip(secondShip, 15);
+    testBoard.placeShip(thirdShip, 50);
+    testBoard.receiveAttack(0);
+    testBoard.receiveAttack(50);
+    expect(testBoard.allSunk()).toBe(false);
+    testBoard.receiveAttack(15);
+    testBoard.receiveAttack(51);
+    expect(testBoard.allSunk()).toBe(true);
 })
