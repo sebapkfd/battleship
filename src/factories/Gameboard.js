@@ -1,4 +1,3 @@
-// maybe saving the fleets on an object
 const Gameboard = () => { //Only adding horizontally
     
     let positions = Array(100);

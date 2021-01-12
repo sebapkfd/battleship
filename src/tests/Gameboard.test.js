@@ -1,5 +1,5 @@
-import Gameboard from '../components/Gameboard';
-import Ship from '../components/Ship';
+import Gameboard from '../factories/Gameboard';
+import Ship from '../factories/Ship';
 
 test('Board size', () => {
     
@@ -43,7 +43,7 @@ test('receiving attacks', () => {
     
 })
 
-test.only('All ships are sunk', () => {
+test('All ships are sunk', () => {
     const testBoard = Gameboard();
     const firstShip = Ship(1);
     const secondShip = Ship(1);

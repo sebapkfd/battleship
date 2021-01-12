@@ -1,4 +1,4 @@
-import Ship from '../components/Ship';
+import Ship from '../factories/Ship';
 
 test('creating a Ship of a certain size', () => {
     const status = [false, false, false, false];
