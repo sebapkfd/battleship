@@ -1,17 +1,15 @@
 import Gameboard from './Gameboard'
-import Ship from './Ship';
 
 const Player = () => {
 
     const board = Gameboard();
     const posHit = [];
 
-    const randomPlay = (enemyBoard) => {
+    const randomAttack = (enemyBoard) => {
         if(posHit.length === 100) {
             return false
         }
         let mov;
-        enemyBoard.placeShip(Ship(1), 0)
         while (true) {
             mov = Math.floor(Math.random() * 100); 
             if(!posHit.includes(mov)){
@@ -21,6 +19,17 @@ const Player = () => {
         enemyBoard.receiveAttack(mov);
         posHit.push(mov);
         return true;
+    }
+
+    const randomPlace = (size) => {
+        let pos;
+        while (true) {
+            pos = Math.floor(Math.random() * 100);
+            if(board.placeShip(size, pos)){
+                break
+            }
+        }
+        return pos
     }
 
     const attack = (enemyBoard, pos = 10) => {
@@ -34,7 +43,8 @@ const Player = () => {
 
     const User = {
         board,
-        randomPlay,
+        randomAttack,
+        randomPlace,
         attack
     }
 
