@@ -1,3 +1,5 @@
+import Ship from './Ship';
+
 const Gameboard = () => { //Only adding horizontally
     
     let positions = Array(100);
@@ -11,23 +13,24 @@ const Gameboard = () => { //Only adding horizontally
     }
     let ships = [];
 
-    const placeShip = (ship, cord) => {
-        if(cord%10 === 9 && ship.size > 1) {
+    const placeShip = (size, cord) => {
+        let newShip = Ship(size);
+        if(cord%10 === 9 && newShip.size > 1) {
             return false
         }
 
-        for(let i = cord; i < cord + ship.size; i++) {
+        for(let i = cord; i < cord + newShip.size; i++) {
             if(positions[i].occupied){
                 return false
             }
         }
 
-        for(let i = cord; i < cord + ship.size; i++) {
-            positions[i].ship = ship;
+        for(let i = cord; i < cord + newShip.size; i++) {
+            positions[i].ship = newShip;
             positions[i].occupied = true;
             positions[i].shipPos = i - cord;
         }
-        ships.push(ship);
+        ships.push(newShip);
         return true;
     }
 
