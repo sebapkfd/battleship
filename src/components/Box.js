@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 
 const Box = (props) => {
-    const {id, attack, playerId} = props;
+    const {id, attack, tableName} = props;
     let [boxType, setBoxType] = useState('box');
 
     const handleClick = () => {
-        if(playerId === 'user'){
+        if(tableName === 'pc'){
             const attackResult = attack(id);
             if (attackResult === null) {
                 console.log('move not valid');
@@ -23,7 +23,7 @@ const Box = (props) => {
     return (
         <div 
             className={boxType}
-            id={`${playerId}${id}`}
+            id={`${tableName}${id}`}
             onClick={handleClick}
         >
         </div>

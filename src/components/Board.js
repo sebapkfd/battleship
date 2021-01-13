@@ -17,7 +17,7 @@ const Board = () => {
         if(result.isHit === null){
             console.log('random attack not valid');
         }
-        let boxAttacked = document.getElementById(`pc${result.mov}`);
+        let boxAttacked = document.getElementById(`user${result.mov}`);
         if (result.isHit) {
             boxAttacked.className = 'hit-box';
         }else {
@@ -47,8 +47,8 @@ const Board = () => {
         <div className='board'>
             <button onClick={restartGame}>Clean</button>
             <div className='tables-display'>
-                <Table key={`A${new Date().getTime()}`} selectMove={turns} player='pc'/>
-                <Table key={`B${new Date().getTime()}`} selectMove={turns} player='user'/>
+                <Table key={`A${new Date().getTime()}`} selectMove={turns} tableName='user'/>
+                <Table key={`B${new Date().getTime()}`} selectMove={turns} tableName='pc'/>
             </div>
         </div>
     )
