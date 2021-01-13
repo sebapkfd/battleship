@@ -6,7 +6,7 @@ const Table = (props) => {
     const {selectMove} = props;
 
     const handleSelect = (pos) => {
-        selectMove(pos);
+        return selectMove(pos);
     }
 
     let boxArray = [];

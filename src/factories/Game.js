@@ -12,10 +12,19 @@ const Game = () => {
         return true
     }
 
+    const isFinished = () => {
+        if(Player1.board.allSunk() || Player2.board.allSunk()){
+            console.log('Game Over');
+            return true
+        }
+        return false
+    }
+
     return {
         Player1,
         Player2,
-        defaultPos
+        defaultPos,
+        isFinished
     }
 }
 

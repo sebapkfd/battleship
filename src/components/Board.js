@@ -8,25 +8,16 @@ const Board = () => {
     const user = newGame.Player1;
     const pc = newGame.Player2;
 
-    const isFinished = () => { 
-        //need to add a condition if it is finished cant play anymore
-        // this should be in Game.js
-        if(user.board.allSunk() || pc.board.allSunk()){
-            console.log('Game Over');
-            return true
+    const turns = (pos) => {
+        if(newGame.isFinished()){
+            return false
         }
-        return false
-    }
-
-    const turns = (pos) => { //maybe this goes in Game.js
         if(!user.attack(pc.board, pos)){
             console.log('Move not valid, already attacked');
-            return 
+            return false
         }
         pc.randomAttack(user.board);
-        if(isFinished()){
-            return
-        }
+        return true
     }
 
     return (

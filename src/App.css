@@ -14,8 +14,16 @@
   row-gap: 5px;
 }
 
-.box {
+.box, .hit-box, .no-hit-box {
   border: solid black;
   height: 25px;
   width: 25px;
+}
+
+.hit-box {
+  background-color: red;
+}
+
+.no-hit-box {
+  background-color: blue;
 }
