@@ -32,7 +32,7 @@ const Player = () => {
         return pos
     }
 
-    const attack = (enemyBoard, pos = 10) => {
+    const attack = (enemyBoard, pos) => {
         if(posHit.length === 100 || posHit.includes(pos)) {
             return false
         }
