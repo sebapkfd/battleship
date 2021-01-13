@@ -6,11 +6,13 @@ const Box = (props) => {
 
     const handleClick = () => {
         const attackResult = attack(id);
-        console.log(attackResult);
-        if(attackResult && boxType === 'box'){
+        if (attackResult === null) {
+            console.log('move not valid');
+        }
+        else if(attackResult){
             console.log('should be red');
             setBoxType('hit-box');
-        }else if(!attackResult && boxType === 'box'){
+        }else if(!attackResult){
             console.log('should be blue');
             setBoxType('no-hit-box');
         }

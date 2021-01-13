@@ -10,14 +10,21 @@ const Board = () => {
 
     const turns = (pos) => {
         if(newGame.isFinished()){
-            return false
+            return null;
         }
-        if(!user.attack(pc.board, pos)){
+        const attackHit = user.attack(pc.board, pos);
+        if (attackHit === null){
             console.log('Move not valid, already attacked');
+            return null
+        }
+        else if(attackHit){
+            pc.randomAttack(user.board);
+            return true    
+        }
+        else if (!attackHit){
+            console.log('Hit empty position');
             return false
         }
-        pc.randomAttack(user.board);
-        return true
     }
 
     return (

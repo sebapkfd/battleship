@@ -34,11 +34,14 @@ const Player = () => {
 
     const attack = (enemyBoard, pos) => {
         if(posHit.length === 100 || posHit.includes(pos)) {
-            return false
+            return null
         }
-        enemyBoard.receiveAttack(pos);
+        const isHit = enemyBoard.receiveAttack(pos);
         posHit.push(pos);
-        return true;
+        if(isHit){
+            return true;
+        }
+        return false;
     }
 
     const User = {
