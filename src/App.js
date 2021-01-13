@@ -1,9 +1,12 @@
 import './App.css';
+import Title from './components/Title';
+import Board from './components/Board';
 
 function App() {
   return (
     <div className="App">
-      <h1>Project Started</h1>
+      <Title/>
+      <Board/>
     </div>
   );
 }
