@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Table from './Table';
 import Game from '../factories/Game';
 
@@ -12,21 +12,33 @@ const Board = () => {
         setNewGame(Game());
     }
 
+    const pcTurn = () => {
+        let result = pc.randomAttack(user.board);
+        if(result.isHit === null){
+            console.log('random attack not valid');
+        }
+        let boxAttacked = document.getElementById(`pc${result.mov}`);
+        if (result.isHit) {
+            boxAttacked.className = 'hit-box';
+        }else {
+            boxAttacked.className = 'no-hit-box';
+        }
+    }
+
     const turns = (pos) => {
         if(newGame.isFinished()){
             return null;
         }
         const attackHit = user.attack(pc.board, pos);
         if (attackHit === null){
-            console.log('Move not valid, already attacked');
             return null
         }
         else if(attackHit){
-            pc.randomAttack(user.board);
+            pcTurn();
             return true    
         }
         else if (!attackHit){
-            console.log('Hit empty position');
+            pcTurn();
             return false
         }
     }
@@ -35,8 +47,8 @@ const Board = () => {
         <div className='board'>
             <button onClick={restartGame}>Clean</button>
             <div className='tables-display'>
-                <Table key={`A${new Date().getTime()}`}/>
-                <Table key={`B${new Date().getTime()}`} selectMove={turns}/>
+                <Table key={`A${new Date().getTime()}`} player='pc'/>
+                <Table key={`B${new Date().getTime()}`} selectMove={turns} player='user'/>
             </div>
         </div>
     )

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 const Box = (props) => {
-    const {id, attack} = props;
+    const {id, attack, playerId} = props;
     let [boxType, setBoxType] = useState('box');
 
     const handleClick = () => {
@@ -21,7 +21,7 @@ const Box = (props) => {
     return (
         <div 
             className={boxType}
-            id={id}
+            id={`${playerId}${id}`}
             onClick={handleClick}
         >
         </div>

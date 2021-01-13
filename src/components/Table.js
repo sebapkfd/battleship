@@ -3,7 +3,7 @@ import Box from './Box';
 
 const Table = (props) => {
     
-    const {selectMove} = props;
+    const {selectMove, player} = props;
 
     const handleSelect = (pos) => {
         return selectMove(pos);
@@ -14,6 +14,7 @@ const Table = (props) => {
         const newBox = <Box 
                         key={i}
                         id={i}
+                        playerId={player}
                         attack={handleSelect}
                         />
         boxArray.push(newBox);

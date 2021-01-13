@@ -7,7 +7,7 @@ const Player = () => {
 
     const randomAttack = (enemyBoard) => {
         if(posHit.length === 100) {
-            return false
+            return {isHit: null, mov: -1}
         }
         let mov;
         while (true) {
@@ -16,9 +16,9 @@ const Player = () => {
                 break;
             }
         }
-        enemyBoard.receiveAttack(mov);
+        const isHit = enemyBoard.receiveAttack(mov);
         posHit.push(mov);
-        return true;
+        return {isHit, mov};
     }
 
     const randomPlace = (size) => {
@@ -38,10 +38,7 @@ const Player = () => {
         }
         const isHit = enemyBoard.receiveAttack(pos);
         posHit.push(pos);
-        if(isHit){
-            return true;
-        }
-        return false;
+        return isHit;
     }
 
     const User = {
