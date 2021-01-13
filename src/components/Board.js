@@ -47,7 +47,7 @@ const Board = () => {
         <div className='board'>
             <button onClick={restartGame}>Clean</button>
             <div className='tables-display'>
-                <Table key={`A${new Date().getTime()}`} player='pc'/>
+                <Table key={`A${new Date().getTime()}`} selectMove={turns} player='pc'/>
                 <Table key={`B${new Date().getTime()}`} selectMove={turns} player='user'/>
             </div>
         </div>

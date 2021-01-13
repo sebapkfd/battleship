@@ -5,16 +5,18 @@ const Box = (props) => {
     let [boxType, setBoxType] = useState('box');
 
     const handleClick = () => {
-        const attackResult = attack(id);
-        if (attackResult === null) {
-            console.log('move not valid');
-        }
-        else if(attackResult){
-            console.log('should be red');
-            setBoxType('hit-box');
-        }else if(!attackResult){
-            console.log('should be blue');
-            setBoxType('no-hit-box');
+        if(playerId === 'user'){
+            const attackResult = attack(id);
+            if (attackResult === null) {
+                console.log('move not valid');
+            }
+            else if(attackResult){
+                console.log('should be red');
+                setBoxType('hit-box');
+            }else if(!attackResult){
+                console.log('should be blue');
+                setBoxType('no-hit-box');
+            }
         }
     }
 
