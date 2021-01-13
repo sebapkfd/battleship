@@ -12,6 +12,7 @@ const Table = (props) => {
     let boxArray = [];
     for (let i = 0; i < 100; i++) {
         const newBox = <Box 
+                        key={i}
                         id={i}
                         attack={handleSelect}
                         />

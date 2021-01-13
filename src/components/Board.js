@@ -1,12 +1,16 @@
+import React, {useEffect, useState} from 'react';
 import Table from './Table';
 import Game from '../factories/Game';
 
 const Board = () => {
-
-    const newGame = Game();
+    const [newGame, setNewGame] = useState(Game());
     newGame.defaultPos();
     const user = newGame.Player1;
     const pc = newGame.Player2;
+
+    const restartGame = () => {
+        setNewGame(Game());
+    }
 
     const turns = (pos) => {
         if(newGame.isFinished()){
@@ -29,8 +33,11 @@ const Board = () => {
 
     return (
         <div className='board'>
-            <Table/>
-            <Table selectMove={turns}/>
+            <button onClick={restartGame}>Clean</button>
+            <div className='tables-display'>
+                <Table key={`A${new Date().getTime()}`}/>
+                <Table key={`B${new Date().getTime()}`} selectMove={turns}/>
+            </div>
         </div>
     )
 }
