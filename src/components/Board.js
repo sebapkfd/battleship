@@ -4,12 +4,16 @@ import Game from '../factories/Game';
 
 const Board = () => {
     const [newGame, setNewGame] = useState(Game());
-    newGame.defaultPos();
+    const [started, setStarted] = useState(false);
+    const [count, setCount] = useState(0);
+    // newGame.defaultPos();
     const user = newGame.Player1;
     const pc = newGame.Player2;
 
     const restartGame = () => {
         setNewGame(Game());
+        setStarted(false);
+        setCount(0);
     }
 
     const pcTurn = () => {
@@ -43,11 +47,24 @@ const Board = () => {
         }
     }
 
+    const placeFleets = (id) => {
+        if(!started) {
+            user.board.placeShip(1, id)
+            pc.randomPlace(1)
+            setCount(count + 1);
+            if(count === 3) {
+                setStarted(true);
+                console.log('Game Starts');
+            }
+        }
+    }
+
+
     return (
         <div className='board'>
             <button onClick={restartGame}>Clean</button>
             <div className='tables-display'>
-                <Table key={`A${new Date().getTime()}`} selectMove={turns} tableName='user'/>
+                <Table key={`A${new Date().getTime()}`} selectMove={turns} selectPos={placeFleets} tableName='user'/>
                 <Table key={`B${new Date().getTime()}`} selectMove={turns} tableName='pc'/>
             </div>
         </div>

@@ -3,10 +3,14 @@ import Box from './Box';
 
 const Table = (props) => {
     
-    const {selectMove, tableName} = props;
+    const {selectMove, tableName, selectPos} = props;
 
     const handleSelect = (pos) => {
         return selectMove(pos);
+    }
+
+    const handlePos = (pos) => {
+        return selectPos(pos)
     }
 
     let boxArray = [];
@@ -16,6 +20,7 @@ const Table = (props) => {
                         id={i}
                         tableName={tableName}
                         attack={handleSelect}
+                        place={handlePos}
                         />
         boxArray.push(newBox);
     }
