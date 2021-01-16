@@ -13,25 +13,53 @@ const Gameboard = () => { //Only adding horizontally
     }
     let ships = [];
 
-    const placeShip = (size, cord) => {
-        let newShip = Ship(size);
-        if(cord%10 === 9 && newShip.size > 1) {
+    const placeVertically = (ship, cord) => {
+        const lastPos = cord + (ship.size-1)*10;
+        if(lastPos > 99) {
             return false
         }
 
-        for(let i = cord; i < cord + newShip.size; i++) {
+        for(let i = cord; i <= lastPos; i+= 10) {
+            if(positions[i].occupied) {
+                return false;
+            }
+        }
+
+        for(let i = cord; i <= lastPos; i+= 10) {
+            positions[i].ship = ship;
+            positions[i].occupied = true;
+            positions[i].shipPos = (i - cord)/10;
+        }
+        ships.push(ship);
+        return true;
+    }
+
+    const placeHorizontally = (ship, cord) => {
+        if(cord%10 === 9 && ship.size > 1) { //wrong
+            return false
+        }
+
+        for(let i = cord; i < cord + ship.size; i++) {
             if(positions[i].occupied){
                 return false
             }
         }
 
-        for(let i = cord; i < cord + newShip.size; i++) {
-            positions[i].ship = newShip;
+        for(let i = cord; i < cord + ship.size; i++) {
+            positions[i].ship = ship;
             positions[i].occupied = true;
             positions[i].shipPos = i - cord;
         }
-        ships.push(newShip);
+        ships.push(ship);
         return true;
+    }
+
+    const placeShip = (size, cord, dir = 'hor') => {
+        let newShip = Ship(size);
+        if(dir === 'hor'){
+            return placeHorizontally(newShip, cord);
+        }
+       return placeVertically(newShip, cord);
     }
 
     const receiveAttack = (cord) => {

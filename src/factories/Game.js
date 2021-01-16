@@ -5,9 +5,9 @@ const Game = () => {
     const Player2 = Player();
 
     const defaultPos = () => {
-        for(let i = 0; i < 3; i++){
-            Player1.board.placeShip(1, i*10);
-            Player2.board.placeShip(1, i*10);
+        for(let i = 0; i < 1; i++){
+            Player1.board.placeShip(4, 1, 'vert');
+            Player2.board.placeShip(4, 1, 'vert');
         }
         return true
     }
