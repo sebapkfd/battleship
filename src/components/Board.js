@@ -6,11 +6,10 @@ const Board = () => {
     const [newGame, setNewGame] = useState(Game());
     const [started, setStarted] = useState(false);
     const [count, setCount] = useState(0);
-    // newGame.defaultPos();
     const user = newGame.Player1;
     const pc = newGame.Player2;
 
-    const restartGame = () => {
+    const restartGame = () => { //giving problems
         setNewGame(Game());
         setStarted(false);
         setCount(0);
@@ -51,6 +50,9 @@ const Board = () => {
         if(!started) {
             user.board.placeShip(1, id)
             pc.randomPlace(1)
+            let boxAttacked = document.getElementById(`user${id}`);
+            boxAttacked.className = 'box-selected';
+            console.log('Working')
             setCount(count + 1);
             if(count === 3) {
                 setStarted(true);

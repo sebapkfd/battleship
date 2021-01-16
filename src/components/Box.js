@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 
-const Box = (props) => {
+const Box = (props) => { //maybe separate classes
     const {id, attack, tableName, place} = props;
-    let [boxType, setBoxType] = useState('box');
+    const [boxType, setBoxType] = useState('box');
 
     const handleClick = () => {
         if(tableName === 'pc'){
@@ -18,7 +18,7 @@ const Box = (props) => {
                 setBoxType('no-hit-box');
             }
         }
-        else if (tableName === 'user') {
+        else if(tableName === "user"){
             return place(id);
         }
     }

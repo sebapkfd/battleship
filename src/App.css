@@ -14,7 +14,7 @@
   row-gap: 5px;
 }
 
-.box, .hit-box, .no-hit-box {
+.box, .hit-box, .no-hit-box, .box-selected {
   border: solid black;
   height: 25px;
   width: 25px;
@@ -26,4 +26,8 @@
 
 .no-hit-box {
   background-color: blue;
+}
+
+.box-selected {
+  background-color: green;
 }
