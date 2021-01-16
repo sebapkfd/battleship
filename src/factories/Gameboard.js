@@ -35,17 +35,18 @@ const Gameboard = () => { //Only adding horizontally
     }
 
     const placeHorizontally = (ship, cord) => {
-        if(cord%10 === 9 && ship.size > 1) { //wrong
+        const lastPos = cord + ship.size - 1;
+        if(Math.floor(cord/10) !== Math.floor(lastPos/10)) {
             return false
         }
 
-        for(let i = cord; i < cord + ship.size; i++) {
+        for(let i = cord; i <= lastPos; i++) {
             if(positions[i].occupied){
                 return false
             }
         }
 
-        for(let i = cord; i < cord + ship.size; i++) {
+        for(let i = cord; i <= lastPos; i++) {
             positions[i].ship = ship;
             positions[i].occupied = true;
             positions[i].shipPos = i - cord;

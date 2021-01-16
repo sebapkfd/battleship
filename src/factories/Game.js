@@ -6,8 +6,8 @@ const Game = () => {
 
     const defaultPos = () => {
         for(let i = 0; i < 1; i++){
-            Player1.board.placeShip(4, 1, 'vert');
-            Player2.board.placeShip(4, 1, 'vert');
+            Player1.board.placeShip(3, 0);
+            Player2.board.placeShip(3, 0);
         }
         return true
     }
