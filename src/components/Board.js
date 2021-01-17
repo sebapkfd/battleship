@@ -82,12 +82,10 @@ const Board = () => {
     const placeFleets = (id) => {
         if(!started) {
             let sizeShip = 4;
-            // let directionOpt = ['hor', 'ver'];
-            // let direction = directionOpt[Math.floor(Math.random() * 2)];
             const userResult = user.board.placeShip(sizeShip, id, direction);
             if(userResult) {
                 displayShips(sizeShip, id, direction);
-                const pcResult = pc.randomPlace(sizeShip, direction);
+                const pcResult = pc.randomPlace(sizeShip);
                 setCount(count + 1);
                 if(count === 3) {
                     setStarted(true);

@@ -21,8 +21,10 @@ const Player = () => {
         return {isHit, mov};
     }
 
-    const randomPlace = (size, dir) => {
+    const randomPlace = (size) => {
         let pos;
+        let dirOpt = ['hor', 'ver'];
+        let dir = dirOpt[Math.floor(Math.random() * 2)];
         while (true) {
             pos = Math.floor(Math.random() * 100);
             if(board.placeShip(size, pos, dir)){
