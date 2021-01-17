@@ -45,7 +45,7 @@ const Board = () => {
         }
     }
 
-    const turns = (pos) => {// add started validation
+    const turns = (pos) => {
         if(newGame.isFinished() || !started){
             return null;
         }
@@ -87,7 +87,6 @@ const Board = () => {
 
     const placeFleets = (id) => {
         if(!started) {
-            // let sizeShip = 4;
             const userResult = user.board.placeShip(shipSize, id, direction);
             if(userResult) {
                 displayShips(shipSize, id, direction);
@@ -103,7 +102,7 @@ const Board = () => {
 
     let userTable = <Table key={`A${resetKey}`} selectMove={turns} selectPos={placeFleets} tableName='user'/>;
     let pcTable = <Table key={`B${resetKey}`} selectMove={turns} selectPos={placeFleets} tableName='pc'/>;
-    let sizeButton = (shipSize > 1) ? <button>{shipSize}</button>: null;
+    let sizeButton = (shipSize > 1) ? <button>Ship size: {shipSize}</button>: null;
     let directionButton = (started) ? null : <button onClick={changeDirection}>{direction}</button>;
 
     return (

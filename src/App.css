@@ -1,17 +1,27 @@
-.tables-display {
+h2 {
+  margin: 10px 0 0 0;
+}
+
+.tablename {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+}
+
+.tables-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+  justify-content: space-evenly;
 }
 
 .table {
-  width: 30%;
+  width: 100%;
   display: grid;
   padding-top: 15px;
   margin-top: 0;
   grid-template-columns: repeat(10, auto);
-  justify-content: space-around;
-  column-gap: 5px;
-  row-gap: 5px;
+  justify-content: center;
+  column-gap: 2px;
+  row-gap: 2px;
 }
 
 .box, .hit-box, .no-hit-box, .box-selected {
