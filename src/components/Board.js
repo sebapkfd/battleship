@@ -6,7 +6,7 @@ const Board = () => {
     const [newGame, setNewGame] = useState(Game());
     const [started, setStarted] = useState(false);
     const [resetKey, setResetKey] = useState(0);
-    const [count, setCount] = useState(0);
+    const [shipSize, setShipSize] = useState(5);
     const [direction, setDirection] = useState('horizontal');
     const user = newGame.Player1;
     const pc = newGame.Player2;
@@ -14,8 +14,8 @@ const Board = () => {
     const restartGame = () => {
         setNewGame(Game());
         setStarted(false);
-        setCount(0);
         setResetKey(resetKey + 1)
+        setShipSize(5);
     }
 
     const changeDirection = () => {
@@ -24,6 +24,12 @@ const Board = () => {
         }
         else {
             setDirection('horizontal')
+        }
+    }
+
+    const updateShips = () => {
+        if(shipSize > 1) {
+            setShipSize(shipSize - 1);
         }
     }
 
@@ -81,13 +87,13 @@ const Board = () => {
 
     const placeFleets = (id) => {
         if(!started) {
-            let sizeShip = 4;
-            const userResult = user.board.placeShip(sizeShip, id, direction);
+            // let sizeShip = 4;
+            const userResult = user.board.placeShip(shipSize, id, direction);
             if(userResult) {
-                displayShips(sizeShip, id, direction);
-                const pcResult = pc.randomPlace(sizeShip);
-                setCount(count + 1);
-                if(count === 3) {
+                displayShips(shipSize, id, direction);
+                pc.randomPlace(shipSize);
+                updateShips();
+                if(shipSize === 2) {
                     setStarted(true);
                     console.log('Game Starts');
                 }
@@ -102,6 +108,7 @@ const Board = () => {
         <div className='board'>
             <button onClick={restartGame}>Clean</button>
             <button onClick={changeDirection}>{direction}</button>
+            <button>{shipSize}</button>
             <div className='tables-display'>
                 {userTable}
                 {pcTable}
@@ -110,4 +117,4 @@ const Board = () => {
     )
 }
 
-export default Board ;
+export default Board;
