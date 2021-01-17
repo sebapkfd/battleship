@@ -15,7 +15,6 @@ const Game = () => {
 
     const isFinished = () => {
         if(Player1.board.allSunk() || Player2.board.allSunk()){
-            console.log('Game Over');
             return true
         }
         return false

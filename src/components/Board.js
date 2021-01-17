@@ -49,7 +49,6 @@ const Board = () => {
 
     const turns = (pos) => {
         if(newGame.isFinished() || !started){
-            displayWinner();
             return null;
         }
         const attackHit = user.attack(pc.board, pos);
@@ -57,6 +56,7 @@ const Board = () => {
             return null
         }
         pcTurn();
+        displayWinner();
         return attackHit;
     }
 
