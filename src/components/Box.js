@@ -1,26 +1,36 @@
 import React, {useState} from 'react';
 
-const Box = (props) => { //maybe separate classes
-    const {id, attack, tableName, place} = props;
+const Box = (props) => {
+    const {id, attack, tableName} = props;
     const [boxType, setBoxType] = useState('box');
 
-    const handleClick = () => {
-        if(tableName === 'pc'){
-            const attackResult = attack(id);
+    const pcFunction = () => {
+        const attackResult = attack(id);
             if (attackResult === null) {
                 console.log('move not valid');
             }
             else if(attackResult){
-                console.log('should be red');
                 setBoxType('hit-box');
             }else if(!attackResult){
-                console.log('should be blue');
                 setBoxType('no-hit-box');
             }
+    }
+
+    const userFunction = () => {
+        const attackResult = attack(id);
+            if (attackResult === null) {
+                setBoxType('box-selected'); //this change color only when game started
+                console.log(`Working on: user${id}`, boxType)
+            }
+        // setBoxType('box-selected'); //this change color only when game started
+        // console.log(`Working on: user${id}`, boxType)
+    }
+
+    const handleClick = () => {
+        if(tableName === 'pc'){
+            return pcFunction();
         }
-        else if(tableName === "user"){
-            return place(id);
-        }
+        return attack(id);
     }
 
     return (

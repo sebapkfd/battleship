@@ -5,6 +5,7 @@ import Game from '../factories/Game';
 const Board = () => {
     const [newGame, setNewGame] = useState(Game());
     const [started, setStarted] = useState(false);
+    const [resetKey, setResetKey] = useState(0);
     const [count, setCount] = useState(0);
     const user = newGame.Player1;
     const pc = newGame.Player2;
@@ -13,6 +14,7 @@ const Board = () => {
         setNewGame(Game());
         setStarted(false);
         setCount(0);
+        setResetKey(resetKey + 1)
     }
 
     const pcTurn = () => {
@@ -50,8 +52,10 @@ const Board = () => {
         if(!started) {
             user.board.placeShip(1, id)
             pc.randomPlace(1)
-            let boxAttacked = document.getElementById(`user${id}`);
-            boxAttacked.className = 'box-selected';
+            const boxAttacked = document.getElementById(`user${id}`);
+            if (boxAttacked.className !== 'box-selected') {
+                boxAttacked.className = 'box-selected';
+            }
             console.log('Working')
             setCount(count + 1);
             if(count === 3) {
@@ -61,13 +65,16 @@ const Board = () => {
         }
     }
 
+    let userTable = <Table key={`A${resetKey}`} selectMove={turns} selectPos={placeFleets} tableName='user'/>;
+    let pcTable = <Table key={`B${resetKey}`} selectMove={turns} selectPos={placeFleets} tableName='pc'/>;
+
 
     return (
         <div className='board'>
             <button onClick={restartGame}>Clean</button>
             <div className='tables-display'>
-                <Table key={`A${new Date().getTime()}`} selectMove={turns} selectPos={placeFleets} tableName='user'/>
-                <Table key={`B${new Date().getTime()}`} selectMove={turns} tableName='pc'/>
+                {userTable}
+                {pcTable}
             </div>
         </div>
     )

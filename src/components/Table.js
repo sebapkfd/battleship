@@ -6,21 +6,19 @@ const Table = (props) => {
     const {selectMove, tableName, selectPos} = props;
 
     const handleSelect = (pos) => {
-        return selectMove(pos);
+        if(tableName === 'pc'){
+            return selectMove(pos);   
+        }
+        return selectPos(pos);
     }
 
-    const handlePos = (pos) => {
-        return selectPos(pos)
-    }
-
-    let boxArray = [];
+    const boxArray = [];
     for (let i = 0; i < 100; i++) {
         const newBox = <Box 
                         key={i}
                         id={i}
                         tableName={tableName}
                         attack={handleSelect}
-                        place={handlePos}
                         />
         boxArray.push(newBox);
     }
