@@ -11,6 +11,8 @@ const Board = () => {
     const [winner, setWinner] = useState(null);
     const user = newGame.Player1;
     const pc = newGame.Player2;
+    const [userAlive, setUserAlive] = useState(4);
+    const [pcAlive, setPcAlive] = useState(4);
 
     const restartGame = () => {
         setNewGame(Game());
@@ -18,6 +20,8 @@ const Board = () => {
         setResetKey(resetKey + 1)
         setShipSize(5);
         setWinner(null);
+        setUserAlive(4);
+        setPcAlive(4);
     }
 
     const changeDirection = () => {
@@ -32,6 +36,17 @@ const Board = () => {
     const updateShips = () => {
         if(shipSize > 1) {
             setShipSize(shipSize - 1);
+        }
+    }
+
+    const updateAlive = (boardToUpdate) => {
+        if(boardToUpdate === 'Pc') {
+            let shipsAlive = pc.board.availableShips();
+            setPcAlive(shipsAlive);
+        }
+        else if(boardToUpdate === 'User') {
+            let shipsAlive = user.board.availableShips();
+            setUserAlive(shipsAlive);
         }
     }
 
@@ -52,10 +67,12 @@ const Board = () => {
             return null;
         }
         const attackHit = user.attack(pc.board, pos);
+        updateAlive('Pc')
         if (attackHit === null){
             return null
         }
         pcTurn();
+        updateAlive('User')
         displayWinner();
         return attackHit;
     }
@@ -110,8 +127,22 @@ const Board = () => {
         return false;
     }
 
-    let userTable = <Table key={`A${resetKey}`} selectMove={turns} selectPos={placeFleets} tableName='User'/>;
-    let pcTable = <Table key={`B${resetKey}`} selectMove={turns} selectPos={placeFleets} tableName='Pc'/>;
+    let userTable = <Table key={`A${resetKey}`} 
+                            selectMove={turns} 
+                            selectPos={placeFleets} 
+                            tableName='User'
+                            status={userAlive}
+                            display={started}
+                            />;
+                            
+    let pcTable = <Table key={`B${resetKey}`} 
+                            selectMove={turns} 
+                            selectPos={placeFleets} 
+                            tableName='Pc'
+                            status={pcAlive}
+                            display={started}
+                            />;
+
     let sizeButton = (shipSize > 1) ? <button>Ship size: {shipSize}</button>: null;
     let directionButton = (started) ? null : <button onClick={changeDirection}>{direction}</button>;
     let winnerMsg = (winner) ? <h3> {winner} wins!</h3> : null;

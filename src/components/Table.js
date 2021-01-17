@@ -3,7 +3,7 @@ import Box from './Box';
 
 const Table = (props) => {
     
-    const {selectMove, tableName, selectPos} = props;
+    const {selectMove, tableName, selectPos, status, display} = props;
 
     const handleSelect = (pos) => {
         if(tableName === 'Pc'){
@@ -23,10 +23,15 @@ const Table = (props) => {
         boxArray.push(newBox);
     }
 
+    let tableStatus = (display) ? <h2>{status} Ships Available {display}</h2>: null;
+
     return (
         <div>
-            <div className='tablename'>
+            <div className='table-name'>
                 <h2>{tableName} Board</h2>
+            </div>
+            <div className='table-status'>
+                {tableStatus}
             </div>
             <div className='table'>
                 {boxArray}

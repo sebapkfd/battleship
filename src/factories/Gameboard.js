@@ -1,6 +1,6 @@
 import Ship from './Ship';
 
-const Gameboard = () => { //Only adding horizontally
+const Gameboard = () => {
     
     let positions = Array(100);
     for (let i = 0; i < positions.length; i++) {
@@ -85,11 +85,22 @@ const Gameboard = () => { //Only adding horizontally
         return aux;
     }
 
+    const availableShips = () => {
+        let count = 0;
+        ships.forEach(ship => {
+            if(ship.isSunk() === false){
+                count++;
+            }
+        })
+        return count;
+    }
+
     const board = {
         positions,
         placeShip,
         receiveAttack,
-        allSunk
+        allSunk,
+        availableShips
     };
 
     return board;
