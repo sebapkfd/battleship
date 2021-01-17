@@ -6,7 +6,7 @@ const Table = (props) => {
     const {selectMove, tableName, selectPos} = props;
 
     const handleSelect = (pos) => {
-        if(tableName === 'pc'){
+        if(tableName === 'Pc'){
             return selectMove(pos);   
         }
         return selectPos(pos);

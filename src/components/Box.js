@@ -5,7 +5,7 @@ const Box = (props) => {
     const [boxType, setBoxType] = useState('box');
 
     const handleClick = () => {
-        if(tableName === 'pc'){
+        if(tableName === 'Pc'){
             const attackResult = attack(id);
             if (attackResult === null) {
             }

@@ -39,7 +39,7 @@ const Board = () => {
         let result = pc.randomAttack(user.board);
         if(result.isHit === null){
         }
-        let boxAttacked = document.getElementById(`user${result.mov}`);
+        let boxAttacked = document.getElementById(`User${result.mov}`);
         if (result.isHit) {
             boxAttacked.className = 'hit-box';
         }else {
@@ -65,7 +65,7 @@ const Board = () => {
        if(dir === 'horizontal') {
            const lastPos = parseInt(id) + size - 1;
            for(let i = id; i <= lastPos; i++) {
-               boxAttacked = document.getElementById(`user${i}`);
+               boxAttacked = document.getElementById(`User${i}`);
                if (boxAttacked.className !== 'box-selected') {
                    boxAttacked.className = 'box-selected';
                 }
@@ -74,7 +74,7 @@ const Board = () => {
        else if(dir ==='vertical') {
            const lastPos = id + (size-1)*10;
            for(let i = id; i <= lastPos; i+= 10) {
-               boxAttacked = document.getElementById(`user${i}`);
+               boxAttacked = document.getElementById(`User${i}`);
                if (boxAttacked.className !== 'box-selected') {
                    boxAttacked.className = 'box-selected';
                 }
@@ -110,8 +110,8 @@ const Board = () => {
         return false;
     }
 
-    let userTable = <Table key={`A${resetKey}`} selectMove={turns} selectPos={placeFleets} tableName='user'/>;
-    let pcTable = <Table key={`B${resetKey}`} selectMove={turns} selectPos={placeFleets} tableName='pc'/>;
+    let userTable = <Table key={`A${resetKey}`} selectMove={turns} selectPos={placeFleets} tableName='User'/>;
+    let pcTable = <Table key={`B${resetKey}`} selectMove={turns} selectPos={placeFleets} tableName='Pc'/>;
     let sizeButton = (shipSize > 1) ? <button>Ship size: {shipSize}</button>: null;
     let directionButton = (started) ? null : <button onClick={changeDirection}>{direction}</button>;
     let winnerMsg = (winner) ? <h3> {winner} wins!</h3> : null;
