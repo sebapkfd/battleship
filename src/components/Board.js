@@ -47,14 +47,27 @@ const Board = () => {
         }
     }
 
-    const placeFleets = (id) => {
-        if(!started) { // need the confirmation that it is posible
-            const userResult = user.board.placeShip(1, id);
-            if(userResult) {
-                const boxAttacked = document.getElementById(`user${id}`);
-                if (boxAttacked.className !== 'box-selected') {
-                    boxAttacked.className = 'box-selected';
+    const displayShips = (size, id, dir) => {
+        /*
+        display ships of length > 1 vertically
+        */
+       if(dir === 'hor') {
+           const lastPos = parseInt(id) + size - 1;
+           for(let i = id; i <= lastPos; i++) {
+               let boxAttacked = document.getElementById(`user${i}`);
+               if (boxAttacked.className !== 'box-selected') {
+                   boxAttacked.className = 'box-selected';
                 }
+            }
+       }
+    }
+
+    const placeFleets = (id) => {
+        if(!started) {
+            let sizeShip = 2;
+            const userResult = user.board.placeShip(sizeShip, id);
+            if(userResult) {
+                displayShips(sizeShip, id, 'hor');
                 const pcResult = pc.randomPlace(1);
                 setCount(count + 1);
                 if(count === 3) {
