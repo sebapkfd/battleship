@@ -55,7 +55,7 @@ const Gameboard = () => { //Only adding horizontally
         return true;
     }
 
-    const placeShip = (size, cord, dir = 'hor') => {
+    const placeShip = (size, cord, dir) => {
         let newShip = Ship(size);
         if(dir === 'hor'){
             return placeHorizontally(newShip, cord);

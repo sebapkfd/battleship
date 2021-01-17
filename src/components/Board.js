@@ -7,6 +7,7 @@ const Board = () => {
     const [started, setStarted] = useState(false);
     const [resetKey, setResetKey] = useState(0);
     const [count, setCount] = useState(0);
+    const [direction, setDirection] = useState('hor');
     const user = newGame.Player1;
     const pc = newGame.Player2;
 
@@ -15,6 +16,15 @@ const Board = () => {
         setStarted(false);
         setCount(0);
         setResetKey(resetKey + 1)
+    }
+
+    const changeDirection = () => {
+        if(direction === 'hor') {
+            setDirection('ver')
+        }
+        else {
+            setDirection('hor')
+        }
     }
 
     const pcTurn = () => {
@@ -48,9 +58,6 @@ const Board = () => {
     }
 
     const displayShips = (size, id, dir) => {
-        /*
-        display ships of length > 1 vertically
-        */
        let boxAttacked;
        if(dir === 'hor') {
            const lastPos = parseInt(id) + size - 1;
@@ -74,12 +81,13 @@ const Board = () => {
 
     const placeFleets = (id) => {
         if(!started) {
-            let sizeShip = 10;
-            let direction = 'ver';
+            let sizeShip = 4;
+            // let directionOpt = ['hor', 'ver'];
+            // let direction = directionOpt[Math.floor(Math.random() * 2)];
             const userResult = user.board.placeShip(sizeShip, id, direction);
             if(userResult) {
                 displayShips(sizeShip, id, direction);
-                const pcResult = pc.randomPlace(sizeShip);
+                const pcResult = pc.randomPlace(sizeShip, direction);
                 setCount(count + 1);
                 if(count === 3) {
                     setStarted(true);
@@ -95,6 +103,7 @@ const Board = () => {
     return (
         <div className='board'>
             <button onClick={restartGame}>Clean</button>
+            <button onClick={changeDirection}>{direction}</button>
             <div className='tables-display'>
                 {userTable}
                 {pcTable}

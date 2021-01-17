@@ -21,11 +21,11 @@ const Player = () => {
         return {isHit, mov};
     }
 
-    const randomPlace = (size) => {
+    const randomPlace = (size, dir) => {
         let pos;
         while (true) {
             pos = Math.floor(Math.random() * 100);
-            if(board.placeShip(size, pos)){
+            if(board.placeShip(size, pos, dir)){
                 break
             }
         }
