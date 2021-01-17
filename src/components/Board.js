@@ -103,12 +103,14 @@ const Board = () => {
 
     let userTable = <Table key={`A${resetKey}`} selectMove={turns} selectPos={placeFleets} tableName='user'/>;
     let pcTable = <Table key={`B${resetKey}`} selectMove={turns} selectPos={placeFleets} tableName='pc'/>;
+    let sizeButton = (shipSize > 1) ? <button>{shipSize}</button>: null;
+    let directionButton = (started) ? null : <button onClick={changeDirection}>{direction}</button>;
 
     return (
         <div className='board'>
             <button onClick={restartGame}>Clean</button>
-            <button onClick={changeDirection}>{direction}</button>
-            <button>{shipSize}</button>
+            {directionButton}
+            {sizeButton}
             <div className='tables-display'>
                 {userTable}
                 {pcTable}
