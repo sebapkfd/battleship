@@ -29,8 +29,8 @@ const Board = () => {
         }
     }
 
-    const turns = (pos) => {
-        if(newGame.isFinished()){
+    const turns = (pos) => {// add started validation
+        if(newGame.isFinished() || !started){
             return null;
         }
         const attackHit = user.attack(pc.board, pos);
@@ -48,13 +48,13 @@ const Board = () => {
     }
 
     const placeFleets = (id) => {
-        if(!started) {
-            user.board.placeShip(1, id)
-            pc.randomPlace(1)
+        if(!started) { // need the confirmation that it is posible
+            const userResult = user.board.placeShip(1, id);
             const boxAttacked = document.getElementById(`user${id}`);
             if (boxAttacked.className !== 'box-selected') {
                 boxAttacked.className = 'box-selected';
             }
+            const pcResult = pc.randomPlace(1);
             setCount(count + 1);
             if(count === 3) {
                 setStarted(true);
