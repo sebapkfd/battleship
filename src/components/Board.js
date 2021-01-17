@@ -56,7 +56,6 @@ const Board = () => {
             if (boxAttacked.className !== 'box-selected') {
                 boxAttacked.className = 'box-selected';
             }
-            console.log('Working')
             setCount(count + 1);
             if(count === 3) {
                 setStarted(true);
@@ -67,7 +66,6 @@ const Board = () => {
 
     let userTable = <Table key={`A${resetKey}`} selectMove={turns} selectPos={placeFleets} tableName='user'/>;
     let pcTable = <Table key={`B${resetKey}`} selectMove={turns} selectPos={placeFleets} tableName='pc'/>;
-
 
     return (
         <div className='board'>
