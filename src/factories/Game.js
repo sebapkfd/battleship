@@ -3,6 +3,7 @@ import Player from './Player';
 const Game = () => {
     const Player1 = Player();
     const Player2 = Player();
+    let winner = null;
 
     const defaultPos = () => {
         for(let i = 0; i < 1; i++){
@@ -23,6 +24,7 @@ const Game = () => {
     return {
         Player1,
         Player2,
+        winner,
         defaultPos,
         isFinished
     }

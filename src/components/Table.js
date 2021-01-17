@@ -26,7 +26,7 @@ const Table = (props) => {
     return (
         <div>
             <div className='tablename'>
-                <h2>{tableName} Table</h2>
+                <h2>{tableName} Board</h2>
             </div>
             <div className='table'>
                 {boxArray}

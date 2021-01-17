@@ -53,14 +53,8 @@ const Board = () => {
         if (attackHit === null){
             return null
         }
-        else if(attackHit){
-            pcTurn();
-            return true    
-        }
-        else if (!attackHit){
-            pcTurn();
-            return false
-        }
+        pcTurn();
+        return attackHit;
     }
 
     const displayShips = (size, id, dir) => {
