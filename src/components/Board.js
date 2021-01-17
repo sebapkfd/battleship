@@ -50,15 +50,17 @@ const Board = () => {
     const placeFleets = (id) => {
         if(!started) { // need the confirmation that it is posible
             const userResult = user.board.placeShip(1, id);
-            const boxAttacked = document.getElementById(`user${id}`);
-            if (boxAttacked.className !== 'box-selected') {
-                boxAttacked.className = 'box-selected';
-            }
-            const pcResult = pc.randomPlace(1);
-            setCount(count + 1);
-            if(count === 3) {
-                setStarted(true);
-                console.log('Game Starts');
+            if(userResult) {
+                const boxAttacked = document.getElementById(`user${id}`);
+                if (boxAttacked.className !== 'box-selected') {
+                    boxAttacked.className = 'box-selected';
+                }
+                const pcResult = pc.randomPlace(1);
+                setCount(count + 1);
+                if(count === 3) {
+                    setStarted(true);
+                    console.log('Game Starts');
+                }
             }
         }
     }
