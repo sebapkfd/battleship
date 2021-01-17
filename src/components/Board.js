@@ -51,24 +51,35 @@ const Board = () => {
         /*
         display ships of length > 1 vertically
         */
+       let boxAttacked;
        if(dir === 'hor') {
            const lastPos = parseInt(id) + size - 1;
            for(let i = id; i <= lastPos; i++) {
-               let boxAttacked = document.getElementById(`user${i}`);
+               boxAttacked = document.getElementById(`user${i}`);
                if (boxAttacked.className !== 'box-selected') {
                    boxAttacked.className = 'box-selected';
                 }
             }
        }
+       else if(dir ==='ver') {
+           const lastPos = id + (size-1)*10;
+           for(let i = id; i <= lastPos; i+= 10) {
+               boxAttacked = document.getElementById(`user${i}`);
+               if (boxAttacked.className !== 'box-selected') {
+                   boxAttacked.className = 'box-selected';
+                }
+            }
+        }
     }
 
     const placeFleets = (id) => {
         if(!started) {
-            let sizeShip = 2;
-            const userResult = user.board.placeShip(sizeShip, id);
+            let sizeShip = 10;
+            let direction = 'ver';
+            const userResult = user.board.placeShip(sizeShip, id, direction);
             if(userResult) {
-                displayShips(sizeShip, id, 'hor');
-                const pcResult = pc.randomPlace(1);
+                displayShips(sizeShip, id, direction);
+                const pcResult = pc.randomPlace(sizeShip);
                 setCount(count + 1);
                 if(count === 3) {
                     setStarted(true);
