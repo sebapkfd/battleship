@@ -10,7 +10,7 @@ const Board = () => {
     const user = newGame.Player1;
     const pc = newGame.Player2;
 
-    const restartGame = () => { //giving problems
+    const restartGame = () => {
         setNewGame(Game());
         setStarted(false);
         setCount(0);
@@ -20,7 +20,6 @@ const Board = () => {
     const pcTurn = () => {
         let result = pc.randomAttack(user.board);
         if(result.isHit === null){
-            console.log('random attack not valid');
         }
         let boxAttacked = document.getElementById(`user${result.mov}`);
         if (result.isHit) {

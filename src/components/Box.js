@@ -8,7 +8,6 @@ const Box = (props) => {
         if(tableName === 'pc'){
             const attackResult = attack(id);
             if (attackResult === null) {
-                console.log('move not valid');
             }
             else if(attackResult){
                 setBoxType('hit-box');
