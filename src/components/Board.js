@@ -8,6 +8,7 @@ const Board = () => {
     const [resetKey, setResetKey] = useState(0);
     const [shipSize, setShipSize] = useState(5);
     const [direction, setDirection] = useState('horizontal');
+    const [winner, setWinner] = useState(null);
     const user = newGame.Player1;
     const pc = newGame.Player2;
 
@@ -16,6 +17,7 @@ const Board = () => {
         setStarted(false);
         setResetKey(resetKey + 1)
         setShipSize(5);
+        setWinner(null);
     }
 
     const changeDirection = () => {
@@ -47,6 +49,7 @@ const Board = () => {
 
     const turns = (pos) => {
         if(newGame.isFinished() || !started){
+            displayWinner();
             return null;
         }
         const attackHit = user.attack(pc.board, pos);
@@ -94,16 +97,31 @@ const Board = () => {
         }
     }
 
+    const displayWinner = () => {
+        if(newGame.isFinished() && started) {
+            if(user.board.allSunk()) {
+                setWinner('Pc')
+            }
+            else if(pc.board.allSunk()) {
+                setWinner('User');
+            }
+            return true
+        }
+        return false;
+    }
+
     let userTable = <Table key={`A${resetKey}`} selectMove={turns} selectPos={placeFleets} tableName='user'/>;
     let pcTable = <Table key={`B${resetKey}`} selectMove={turns} selectPos={placeFleets} tableName='pc'/>;
     let sizeButton = (shipSize > 1) ? <button>Ship size: {shipSize}</button>: null;
     let directionButton = (started) ? null : <button onClick={changeDirection}>{direction}</button>;
+    let winnerMsg = (winner) ? <h3> {winner} wins!</h3> : null;
 
     return (
         <div className='board'>
             <button onClick={restartGame}>Clean</button>
             {directionButton}
             {sizeButton}
+            {winnerMsg}
             <div className='tables-display'>
                 {userTable}
                 {pcTable}
