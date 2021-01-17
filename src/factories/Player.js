@@ -23,7 +23,7 @@ const Player = () => {
 
     const randomPlace = (size) => {
         let pos;
-        let dirOpt = ['hor', 'ver'];
+        let dirOpt = ['horizontal', 'vertical'];
         let dir = dirOpt[Math.floor(Math.random() * 2)];
         while (true) {
             pos = Math.floor(Math.random() * 100);

@@ -7,7 +7,7 @@ const Board = () => {
     const [started, setStarted] = useState(false);
     const [resetKey, setResetKey] = useState(0);
     const [count, setCount] = useState(0);
-    const [direction, setDirection] = useState('hor');
+    const [direction, setDirection] = useState('horizontal');
     const user = newGame.Player1;
     const pc = newGame.Player2;
 
@@ -19,11 +19,11 @@ const Board = () => {
     }
 
     const changeDirection = () => {
-        if(direction === 'hor') {
-            setDirection('ver')
+        if(direction === 'horizontal') {
+            setDirection('vertical')
         }
         else {
-            setDirection('hor')
+            setDirection('horizontal')
         }
     }
 
@@ -59,7 +59,7 @@ const Board = () => {
 
     const displayShips = (size, id, dir) => {
        let boxAttacked;
-       if(dir === 'hor') {
+       if(dir === 'horizontal') {
            const lastPos = parseInt(id) + size - 1;
            for(let i = id; i <= lastPos; i++) {
                boxAttacked = document.getElementById(`user${i}`);
@@ -68,7 +68,7 @@ const Board = () => {
                 }
             }
        }
-       else if(dir ==='ver') {
+       else if(dir ==='vertical') {
            const lastPos = id + (size-1)*10;
            for(let i = id; i <= lastPos; i+= 10) {
                boxAttacked = document.getElementById(`user${i}`);
