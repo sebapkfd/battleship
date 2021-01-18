@@ -21,6 +21,31 @@ const Player = () => {
         return {isHit, mov};
     }
 
+    const combo = (pos, enemyBoard) => {
+        let possibleAttacks = [];
+        if(pos + 10 < 99 && !posHit.includes(pos + 10)) {
+            possibleAttacks.push(pos + 10);
+        }
+        if(pos - 10 > 0 && !posHit.includes(pos - 10)) {
+            possibleAttacks.push(pos - 10);
+        }
+        if((pos - 1)%10 !== 9 && !posHit.includes(pos - 1)) {
+            possibleAttacks.push(pos - 1)
+        }
+        if( (pos + 1)%10 !==1 && !posHit.includes(pos + 1)) {
+            possibleAttacks.push(pos + 1)
+        }
+        if (possibleAttacks.length === 0) {
+            return randomAttack(enemyBoard);
+        }
+        else {
+            let mov = possibleAttacks[Math.floor(Math.random() * possibleAttacks.length)];
+            const isHit = enemyBoard.receiveAttack(mov);
+            posHit.push(mov);
+            return {isHit, mov};
+        }
+    }
+
     const randomPlace = (size) => {
         let pos;
         let dirOpt = ['horizontal', 'vertical'];
@@ -47,7 +72,8 @@ const Player = () => {
         board,
         randomAttack,
         randomPlace,
-        attack
+        attack,
+        combo
     }
 
     return User;

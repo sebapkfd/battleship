@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Table from './Table';
 import Game from '../factories/Game';
+import Buttons from './Buttons';
 
 const Board = () => {
     const [newGame, setNewGame] = useState(Game());
@@ -33,7 +34,7 @@ const Board = () => {
         }
     }
 
-    const updateShips = () => {
+    const updateShipsAlive = () => {
         if(shipSize > 1) {
             setShipSize(shipSize - 1);
         }
@@ -50,14 +51,20 @@ const Board = () => {
         }
     }
 
-    const pcTurn = () => {
-        let result = pc.randomAttack(user.board);
+    const pcTurn = (mode, prevAttack) => {
+        let result;
+        if (mode === 'combo') {
+            result = pc.combo(prevAttack, user.board);
+        }else {
+            result = pc.randomAttack(user.board);
+        }
+
         if(result.isHit === null){
         }
         let boxAttacked = document.getElementById(`User${result.mov}`);
         if (result.isHit) {
             boxAttacked.className = 'hit-box';
-            pcTurn();
+            pcTurn('combo', result.mov);
         }else {
             boxAttacked.className = 'no-hit-box';
         }
@@ -73,9 +80,8 @@ const Board = () => {
             return null
         }
         else if(!attackHit) {
-            pcTurn();
+            pcTurn(null);
         }
-        // pcTurn();
         updateAlive('User')
         displayWinner();
         return attackHit;
@@ -109,7 +115,7 @@ const Board = () => {
             if(userResult) {
                 displayShips(shipSize, id, direction);
                 pc.randomPlace(shipSize);
-                updateShips();
+                updateShipsAlive();
                 if(shipSize === 2) {
                     setStarted(true);
                 }
@@ -130,35 +136,37 @@ const Board = () => {
         return false;
     }
 
-    let userTable = <Table key={`A${resetKey}`} 
-                            selectMove={turns} 
-                            selectPos={placeFleets} 
-                            tableName='User'
-                            status={userAlive}
-                            display={started}
-                            />;
+    let userTable = <Table
+                        key={`A${resetKey}`} 
+                        selectMove={turns} 
+                        selectPos={placeFleets} 
+                        tableName='User'
+                        status={userAlive}
+                        display={started}
+                        />;
                             
-    let pcTable = <Table key={`B${resetKey}`} 
-                            selectMove={turns} 
-                            selectPos={placeFleets} 
-                            tableName='Pc'
-                            status={pcAlive}
-                            display={started}
-                            />;
-
-    let sizeButton = (shipSize > 1) ? <button>Ship size: {shipSize}</button>: null;
-    let directionButton = (started) ? null : <button onClick={changeDirection}>{direction}</button>;
+    let pcTable = <Table
+                    key={`B${resetKey}`}
+                    selectMove={turns}
+                    selectPos={placeFleets} 
+                    tableName='Pc'
+                    status={pcAlive}
+                    display={started}
+                    />;
+    
     let instruction = (started) ? <h3>Attack the enemy</h3>: <h3> Place your ships on the User Board</h3> 
     let winnerMsg = (winner) ? <h3> {winner} wins!</h3> : null;
 
     return (
         <div className='board'>
             <div className = 'buttons-ins'>{/* Maybe buttons on new Component */}
-                <div className = 'buttons'>
-                    <button onClick={restartGame}>Restart</button>
-                    {directionButton}
-                    {sizeButton}
-                </div>
+                <Buttons
+                    shipSize={shipSize}
+                    started={started}
+                    direction={direction}
+                    changeDirection={changeDirection}
+                    restartGame={restartGame}
+                />
                 {instruction}
                 {winnerMsg}
             </div>
