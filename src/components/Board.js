@@ -57,6 +57,7 @@ const Board = () => {
         let boxAttacked = document.getElementById(`User${result.mov}`);
         if (result.isHit) {
             boxAttacked.className = 'hit-box';
+            pcTurn();
         }else {
             boxAttacked.className = 'no-hit-box';
         }
@@ -71,7 +72,10 @@ const Board = () => {
         if (attackHit === null){
             return null
         }
-        pcTurn();
+        else if(!attackHit) {
+            pcTurn();
+        }
+        // pcTurn();
         updateAlive('User')
         displayWinner();
         return attackHit;
@@ -149,7 +153,7 @@ const Board = () => {
 
     return (
         <div className='board'>
-            <div className = 'buttons-ins'>
+            <div className = 'buttons-ins'>{/* Maybe buttons on new Component */}
                 <div className = 'buttons'>
                     <button onClick={restartGame}>Restart</button>
                     {directionButton}
