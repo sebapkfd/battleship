@@ -2,9 +2,14 @@ h2 {
   margin: 10px 0 0 0;
 }
 
-.table-name, .table-status {
+.table-name, .table-status, .title{
   display: flex;
   justify-content: center;
+}
+.buttons-ins {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .tables-display {

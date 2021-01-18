@@ -108,7 +108,6 @@ const Board = () => {
                 updateShips();
                 if(shipSize === 2) {
                     setStarted(true);
-                    console.log('Game Starts');
                 }
             }
         }
@@ -145,14 +144,20 @@ const Board = () => {
 
     let sizeButton = (shipSize > 1) ? <button>Ship size: {shipSize}</button>: null;
     let directionButton = (started) ? null : <button onClick={changeDirection}>{direction}</button>;
+    let instruction = (started) ? <h3>Attack the enemy</h3>: <h3> Place your ships on the User Board</h3> 
     let winnerMsg = (winner) ? <h3> {winner} wins!</h3> : null;
 
     return (
         <div className='board'>
-            <button onClick={restartGame}>Clean</button>
-            {directionButton}
-            {sizeButton}
-            {winnerMsg}
+            <div className = 'buttons-ins'>
+                <div className = 'buttons'>
+                    <button onClick={restartGame}>Restart</button>
+                    {directionButton}
+                    {sizeButton}
+                </div>
+                {instruction}
+                {winnerMsg}
+            </div>
             <div className='tables-display'>
                 {userTable}
                 {pcTable}
