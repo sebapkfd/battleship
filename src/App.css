@@ -1,3 +1,15 @@
+body{
+  margin: 0;
+}
+
+.App {
+  background-color: rgb(59, 59, 59);
+  color: white;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
 h2 {
   margin: 10px 0 0 0;
 }
@@ -30,19 +42,22 @@ h2 {
 }
 
 .box, .hit-box, .no-hit-box, .box-selected {
-  border: solid black;
+  border: solid rgb(112, 112, 112);
   height: 25px;
   width: 25px;
 }
 
 .hit-box {
-  background-color: red;
+  background-color: rgb(228, 27, 27);
+  border: solid rgb(119, 0, 0)
 }
 
 .no-hit-box {
-  background-color: blue;
+  background-color: rgb(12, 3, 145);
+  border: solid rgb(45, 45, 92)
 }
 
 .box-selected {
-  background-color: green;
+  background-color: rgb(128, 202, 98);
+  border: solid rgb(18, 75, 7)
 }

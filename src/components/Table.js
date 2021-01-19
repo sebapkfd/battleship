@@ -14,10 +14,7 @@ const Table = (props) => {
     const boxArray = [];
     const boxValues = {attack, tableName}
     for (let i = 0; i < 100; i++) {
-        const newBox = <Box 
-                        key={i}
-                        values={{...boxValues, id: i}}
-                        />
+        let newBox = <Box key={i} values={{...boxValues, id: i}}/>
         boxArray.push(newBox);
     }
 
