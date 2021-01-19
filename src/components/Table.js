@@ -3,13 +3,13 @@ import Box from './Box';
 
 const Table = (props) => {
     
-    const {selectMove, tableName, selectPos, status, display} = props;
+    const {turns, placeFleets, started, tableName, status} = props.values;
 
     const handleSelect = (pos) => {
         if(tableName === 'Pc'){
-            return selectMove(pos);   
+            return turns(pos);   
         }
-        return selectPos(pos);
+        return placeFleets(pos);
     }
 
     const boxArray = [];
@@ -23,7 +23,7 @@ const Table = (props) => {
         boxArray.push(newBox);
     }
 
-    let tableStatus = (display) ? <h2>{status} Ships Available {display}</h2>: null;
+    let tableStatus = (started) ? <h2>{status} Ships Available {started}</h2>: null;
 
     return (
         <div>

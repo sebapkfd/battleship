@@ -7,7 +7,7 @@ const Board = () => {
     const [newGame, setNewGame] = useState(Game());
     const [started, setStarted] = useState(false);
     const [resetKey, setResetKey] = useState(0);
-    const [shipSize, setShipSize] = useState(5);
+    const [shipSize, setShipSize] = useState(6);
     const [direction, setDirection] = useState('horizontal');
     const [winner, setWinner] = useState(null);
     const user = newGame.Player1;
@@ -19,7 +19,7 @@ const Board = () => {
         setNewGame(Game());
         setStarted(false);
         setResetKey(resetKey + 1)
-        setShipSize(5);
+        setShipSize(6);
         setWinner(null);
         setUserAlive(4);
         setPcAlive(4);
@@ -138,44 +138,30 @@ const Board = () => {
         }
         return false;
     }
-
-    let userTable = <Table
-                        key={`A${resetKey}`} 
-                        selectMove={turns} 
-                        selectPos={placeFleets} 
-                        tableName='User'
-                        status={userAlive}
-                        display={started}
-                        />;
-                            
-    let pcTable = <Table
-                    key={`B${resetKey}`}
-                    selectMove={turns}
-                    selectPos={placeFleets} 
-                    tableName='Pc'
-                    status={pcAlive}
-                    display={started}
-                    />;
     
     let instruction = (started) ? <h3>Attack the enemy</h3>: <h3> Place your ships on the User Board</h3> 
     let winnerMsg = (winner) ? <h3> {winner} wins!</h3> : null;
+    const buttonValues = {shipSize, started, direction, changeDirection, restartGame};
+    const tableValues = {turns, placeFleets, started};
+    const userValues = {tableName: 'User', status: userAlive};
+    const pcValues = {tableName: 'Pc', status: pcAlive};
 
     return (
         <div className='board'>
-            <div className = 'buttons-ins'>{/* Maybe buttons on new Component */}
-                <Buttons
-                    shipSize={shipSize}
-                    started={started}
-                    direction={direction}
-                    changeDirection={changeDirection}
-                    restartGame={restartGame}
-                />
+            <div className = 'buttons-ins'>
+                <Buttons values={buttonValues}/>
                 {instruction}
                 {winnerMsg}
             </div>
             <div className='tables-display'>
-                {userTable}
-                {pcTable}
+                <Table
+                    key={`A${resetKey}`}
+                    values={{...tableValues, ...userValues}}
+                />
+                <Table
+                    key={`B${resetKey}`}
+                    values={{...tableValues, ...pcValues}}
+                />
             </div>
         </div>
     )
