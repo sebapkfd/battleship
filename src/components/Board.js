@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Table from './Table';
 import Game from '../factories/Game';
 import Buttons from './Buttons';
+import Result from './Result';
 
 const Board = () => {
     const [newGame, setNewGame] = useState(Game());
@@ -139,8 +140,7 @@ const Board = () => {
         return false;
     }
     
-    let instruction = (started) ? <h3>Attack the enemy</h3>: <h3> Place your ships on the User Board</h3> 
-    let winnerMsg = (winner) ? <h3> {winner} wins!</h3> : null;
+    const instruction = (started) ? <h3>Attack the enemy</h3>: <h3> Place your ships on the User Board</h3> 
     const buttonValues = {shipSize, started, direction, changeDirection, restartGame};
     const tableValues = {turns, placeFleets, started};
     const userValues = {tableName: 'User', status: userAlive};
@@ -149,9 +149,9 @@ const Board = () => {
     return (
         <div className='board'>
             <div className = 'buttons-ins'>
-                <Buttons values={buttonValues}/>
                 {instruction}
-                {winnerMsg}
+                <Buttons values={buttonValues}/>
+                <Result winner={winner}/>
             </div>
             <div className='tables-display'>
                 <Table
