@@ -2,10 +2,9 @@ import React from 'react';
 import Box from './Box';
 
 const Table = (props) => {
-    
     const {turns, placeFleets, started, tableName, status} = props.values;
 
-    const handleSelect = (pos) => {
+    const attack = (pos) => {
         if(tableName === 'Pc'){
             return turns(pos);   
         }
@@ -13,17 +12,16 @@ const Table = (props) => {
     }
 
     const boxArray = [];
+    const boxValues = {attack, tableName}
     for (let i = 0; i < 100; i++) {
         const newBox = <Box 
                         key={i}
-                        id={i}
-                        tableName={tableName}
-                        attack={handleSelect}
+                        values={{...boxValues, id: i}}
                         />
         boxArray.push(newBox);
     }
 
-    let tableStatus = (started) ? <h2>{status} Ships Available {started}</h2>: null;
+    const tableStatus = (started) ? <h2>{status} Ships Available {started}</h2>: null;
 
     return (
         <div>

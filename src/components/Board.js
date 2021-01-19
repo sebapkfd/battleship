@@ -53,7 +53,6 @@ const Board = () => {
     }
 
     const pcTurn = (mode) => {
-        
         let result;
         if (mode === 'combo' || pc.possibleAttacks.length > 0) {
             result = pc.combo(user.board);
@@ -140,7 +139,7 @@ const Board = () => {
         return false;
     }
     
-    const instruction = (started) ? <h3>Attack the enemy</h3>: <h3> Place your ships on the User Board</h3> 
+    const instruction = (started) ? <h3>Attack the enemy</h3>: <h3> Place your ships on the User Board</h3>
     const buttonValues = {shipSize, started, direction, changeDirection, restartGame};
     const tableValues = {turns, placeFleets, started};
     const userValues = {tableName: 'User', status: userAlive};

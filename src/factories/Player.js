@@ -1,7 +1,6 @@
 import Gameboard from './Gameboard'
 
 const Player = () => {
-
     const board = Gameboard();
     const posHit = [];
     let possibleAttacks = [];
@@ -38,7 +37,6 @@ const Player = () => {
     }
 
     const combo = (enemyBoard) => {
-        // console.log(possibleAttacks);
         if (possibleAttacks.length === 0) {
             return randomAttack(enemyBoard);
         }
@@ -47,7 +45,6 @@ const Player = () => {
             let mov = possibleAttacks[indexToAttack];
             possibleAttacks.splice(indexToAttack, 1)
             const isHit = enemyBoard.receiveAttack(mov);
-            // console.log(`Pc attacked ${mov}`)
             posHit.push(mov);
             return {isHit, mov};
         }

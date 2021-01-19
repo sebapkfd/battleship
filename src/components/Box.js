@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 const Box = (props) => {
-    const {id, attack, tableName} = props;
+    const {id, attack, tableName} = props.values;
     const [boxType, setBoxType] = useState('box');
 
     const handleClick = () => {
