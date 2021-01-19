@@ -4,6 +4,7 @@ const Player = () => {
 
     const board = Gameboard();
     const posHit = [];
+    let possibleAttacks = [];
 
     const randomAttack = (enemyBoard) => {
         if(posHit.length === 100) {
@@ -21,26 +22,32 @@ const Player = () => {
         return {isHit, mov};
     }
 
-    const combo = (pos, enemyBoard) => {
-        let possibleAttacks = [];
-        if(pos + 10 < 99 && !posHit.includes(pos + 10)) {
+    const setPossibleAttacks = (pos) => {
+        if(pos + 10 < 99 && !posHit.includes(pos + 10) && !possibleAttacks.includes(pos + 10)) {
             possibleAttacks.push(pos + 10);
         }
-        if(pos - 10 > 0 && !posHit.includes(pos - 10)) {
+        if(pos - 10 > 0 && !posHit.includes(pos - 10) && !possibleAttacks.includes(pos - 10)) {
             possibleAttacks.push(pos - 10);
         }
-        if((pos - 1)%10 !== 9 && !posHit.includes(pos - 1) && (pos - 1 > 0)) {
+        if( !(pos%10 === 0 && (pos - 1)%10 === 9) && !posHit.includes(pos - 1) && (pos - 1 >= 0) && !possibleAttacks.includes(pos - 1)) {
             possibleAttacks.push(pos - 1)
         }
-        if( (pos + 1)%10 !==1 && !posHit.includes(pos + 1) && (pos + 1 < 99)) {
+        if( !(pos%10 === 9 && (pos + 1)%10 === 0) && !posHit.includes(pos + 1) && (pos + 1 <= 99) && !possibleAttacks.includes(pos + 1)) {
             possibleAttacks.push(pos + 1)
         }
+    }
+
+    const combo = (enemyBoard) => {
+        // console.log(possibleAttacks);
         if (possibleAttacks.length === 0) {
             return randomAttack(enemyBoard);
         }
         else {
-            let mov = possibleAttacks[Math.floor(Math.random() * possibleAttacks.length)];
+            let indexToAttack = Math.floor(Math.random() * possibleAttacks.length);
+            let mov = possibleAttacks[indexToAttack];
+            possibleAttacks.splice(indexToAttack, 1)
             const isHit = enemyBoard.receiveAttack(mov);
+            // console.log(`Pc attacked ${mov}`)
             posHit.push(mov);
             return {isHit, mov};
         }
@@ -70,10 +77,12 @@ const Player = () => {
 
     const User = {
         board,
+        possibleAttacks,
         randomAttack,
         randomPlace,
         attack,
-        combo
+        combo,
+        setPossibleAttacks
     }
 
     return User;

@@ -51,20 +51,23 @@ const Board = () => {
         }
     }
 
-    const pcTurn = (mode, prevAttack) => {
+    const pcTurn = (mode) => {
+        
         let result;
-        if (mode === 'combo') {
-            result = pc.combo(prevAttack, user.board);
+        if (mode === 'combo' || pc.possibleAttacks.length > 0) {
+            result = pc.combo(user.board);
         }else {
             result = pc.randomAttack(user.board);
         }
 
         if(result.isHit === null){
+
         }
         let boxAttacked = document.getElementById(`User${result.mov}`);
         if (result.isHit) {
             boxAttacked.className = 'hit-box';
-            pcTurn('combo', result.mov);
+            pc.setPossibleAttacks(result.mov)
+            pcTurn('combo');
         }else {
             boxAttacked.className = 'no-hit-box';
         }
@@ -80,7 +83,7 @@ const Board = () => {
             return null
         }
         else if(!attackHit) {
-            pcTurn(null);
+            pcTurn('random');
         }
         updateAlive('User')
         displayWinner();
