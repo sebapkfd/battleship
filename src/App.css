@@ -9,6 +9,7 @@ body{
   padding: 0;
   min-height: 100vh;
   font-family: Tahoma, sans-serif;
+  padding-bottom: 15px;
 }
 
 h2 {

@@ -144,6 +144,7 @@ const Board = () => {
     const tableValues = {turns, placeFleets, started};
     const userValues = {tableName: 'User', status: userAlive};
     const pcValues = {tableName: 'Pc', status: pcAlive};
+    const pcTable = (started) ? <Table key={`B${resetKey}`} values={{...tableValues, ...pcValues}}/> : null;
 
     return (
         <div className='board'>
@@ -157,10 +158,7 @@ const Board = () => {
                     key={`A${resetKey}`}
                     values={{...tableValues, ...userValues}}
                 />
-                <Table
-                    key={`B${resetKey}`}
-                    values={{...tableValues, ...pcValues}}
-                />
+                {pcTable}
             </div>
         </div>
     )
