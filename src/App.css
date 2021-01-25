@@ -9,7 +9,8 @@ body{
   padding: 0;
   min-height: 100vh;
   font-family: Tahoma, sans-serif;
-  padding-bottom: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 h2 {
@@ -78,4 +79,16 @@ button {
 button:hover {
   color: white;
   background-color: rgb(112, 112, 112);
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  height: 50px;
+}
+
+#Repo {
+  height: 5vh;
 }
