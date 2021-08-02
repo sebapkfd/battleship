@@ -1,5 +1,6 @@
 import React from 'react';
 import Box from './Box';
+import TableInfo from './TableInfo'
 
 const Table = (props) => {
     const {turns, placeFleets, started, tableName, status} = props.values;
@@ -18,16 +19,9 @@ const Table = (props) => {
         boxArray.push(newBox);
     }
 
-    const tableStatus = (started) ? <h2>{status} Ships Available {started}</h2>: null;
-
     return (
         <div>
-            <div className='table-name'>
-                <h2>{tableName} Board</h2>
-            </div>
-            <div className='table-status'>
-                {tableStatus}
-            </div>
+            <TableInfo info={{tableName, started, status}}/>
             <div className='table'>
                 {boxArray}
             </div>
