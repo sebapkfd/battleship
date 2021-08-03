@@ -13,8 +13,8 @@ const Board = () => {
     const [winner, setWinner] = useState(null);
     const user = newGame.Player1;
     const pc = newGame.Player2;
-    const [userAlive, setUserAlive] = useState(4);
-    const [pcAlive, setPcAlive] = useState(4);
+    const [userAlive, setUserAlive] = useState(5);
+    const [pcAlive, setPcAlive] = useState(5);
 
     const restartGame = () => {
         setNewGame(Game());

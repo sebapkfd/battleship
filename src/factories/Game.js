@@ -13,10 +13,7 @@ const Game = () => {
     }
 
     const isFinished = () => {
-        if(Player1.board.allSunk() || Player2.board.allSunk()){
-            return true
-        }
-        return false
+        return (Player1.board.allSunk() || Player2.board.allSunk()) ? true : false;
     }
 
     return {

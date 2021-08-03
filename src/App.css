@@ -17,10 +17,13 @@ h2 {
   margin: 10px 0 0 0;
 }
 
-.table-name, .table-status, .title{
+.table-name,
+.table-status,
+.title {
   display: flex;
   justify-content: center;
 }
+
 .buttons-ins {
   display: flex;
   flex-direction: column;
@@ -43,7 +46,10 @@ h2 {
   row-gap: 2px;
 }
 
-.box, .hit-box, .no-hit-box, .box-selected {
+.box,
+.hit-box,
+.no-hit-box,
+.box-selected {
   border: solid rgb(112, 112, 112);
   height: 25px;
   width: 25px;
@@ -89,6 +95,6 @@ button:hover {
   height: 50px;
 }
 
-#Repo {
+#repo {
   height: 5vh;
 }

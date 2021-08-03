@@ -1,16 +1,11 @@
 import Ship from './Ship';
 
 const Gameboard = () => {
-    
-    let positions = Array(100);
-    for (let i = 0; i < positions.length; i++) {
-        positions[i] = {
-            occupied: false,
-            ship: null,
-            shipPos: null,
-            isHit: false
-        }
-    }
+
+    let positions = [...Array(100)].map(item => {
+        return {occupied: false, ship: null, shipPos: null, isHit: false}
+    })
+
     let ships = [];
 
     const placeVertically = (ship, cord) => {
@@ -78,7 +73,7 @@ const Gameboard = () => {
     const allSunk = () => {
         let aux = true;
         ships.forEach(ship => {
-            if(ship.isSunk() === false){
+            if(!ship.isSunk()){
                 aux = false;
             }
         })
@@ -88,7 +83,7 @@ const Gameboard = () => {
     const availableShips = () => {
         let count = 0;
         ships.forEach(ship => {
-            if(ship.isSunk() === false){
+            if(!ship.isSunk()){
                 count++;
             }
         })
