@@ -6,10 +6,7 @@ const Table = (props) => {
     const {turns, placeFleets, started, tableName, status} = props.values;
 
     const attack = (pos) => {
-        if(tableName === 'Pc'){
-            return turns(pos);   
-        }
-        return placeFleets(pos);
+        return (tableName === 'Pc') ? turns(pos) : placeFleets(pos);
     }
 
     const boxArray = [...Array(100)].map((item, i) => {

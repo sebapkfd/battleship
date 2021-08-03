@@ -8,7 +8,7 @@ const Buttons = (props) => {
     const restartButton = <button onClick={restartGame}>Restart</button>
 
     return (
-        <div className = 'buttons'>
+        <div className='buttons'>
             {restartButton}
             {directionButton}
             {sizeButton}

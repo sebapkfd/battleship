@@ -19,7 +19,7 @@ const Board = () => {
     const restartGame = () => {
         setNewGame(Game());
         setStarted(false);
-        setResetKey(resetKey + 1)
+        setResetKey(resetKey + 1);
         setShipSize(6);
         setWinner(null);
         setUserAlive(4);
@@ -28,10 +28,10 @@ const Board = () => {
 
     const changeDirection = () => {
         if(direction === 'horizontal') {
-            setDirection('vertical')
+            setDirection('vertical');
         }
         else {
-            setDirection('horizontal')
+            setDirection('horizontal');
         }
     }
 
@@ -56,7 +56,8 @@ const Board = () => {
         let result;
         if (mode === 'combo' || pc.possibleAttacks.length > 0) {
             result = pc.combo(user.board);
-        }else {
+        }
+        else {
             result = pc.randomAttack(user.board);
         }
 
@@ -66,9 +67,10 @@ const Board = () => {
         let boxAttacked = document.getElementById(`User${result.mov}`);
         if (result.isHit) {
             boxAttacked.className = 'hit-box';
-            pc.setPossibleAttacks(result.mov)
+            pc.setPossibleAttacks(result.mov);
             pcTurn('combo');
-        }else {
+        }
+        else {
             boxAttacked.className = 'no-hit-box';
         }
     }
@@ -79,8 +81,8 @@ const Board = () => {
         }
         const attackHit = user.attack(pc.board, pos);
         updateAlive('Pc')
-        if (attackHit === null){
-            return null
+        if(attackHit === null) {
+            return null;
         }
         else if(!attackHit) {
             pcTurn('random');
@@ -129,17 +131,17 @@ const Board = () => {
     const displayWinner = () => {
         if(newGame.isFinished() && started) {
             if(user.board.allSunk()) {
-                setWinner('Pc')
+                setWinner('Pc');
             }
             else if(pc.board.allSunk()) {
                 setWinner('User');
             }
-            return true
+            return true;
         }
         return false;
     }
     
-    const instruction = (started) ? <h3>Attack the enemy</h3>: <h3> Place your ships on the Board</h3>
+    const instruction = (started) ? <h3>Attack the enemy</h3>: <h3> Place your ships on the Board</h3>;
     const buttonValues = {shipSize, started, direction, changeDirection, restartGame};
     const tableValues = {turns, placeFleets, started};
     const userValues = {tableName: 'User', status: userAlive};

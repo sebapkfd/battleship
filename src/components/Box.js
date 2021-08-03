@@ -9,9 +9,10 @@ const Box = (props) => {
             const attackResult = attack(id);
             if (attackResult === null) {
             }
-            else if(attackResult){
+            else if(attackResult) {
                 setBoxType('hit-box');
-            }else if(!attackResult){
+            }
+            else if(!attackResult) {
                 setBoxType('no-hit-box');
             }
             return
