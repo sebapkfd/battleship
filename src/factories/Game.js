@@ -1,24 +1,24 @@
 import Player from './Player';
 
 const Game = () => {
-    const Player1 = Player();
-    const Player2 = Player();
+    const user = Player();
+    const pc = Player();
 
     const defaultPos = () => {
         for(let i = 0; i < 1; i++){
-            Player1.board.placeShip(3, 0);
-            Player2.board.placeShip(3, 0);
+            user.board.placeShip(3, 0);
+            pc.board.placeShip(3, 0);
         }
         return true
     }
 
     const isFinished = () => {
-        return (Player1.board.allSunk() || Player2.board.allSunk()) ? true : false;
+        return (user.board.allSunk() || pc.board.allSunk()) ? true : false;
     }
 
     return {
-        Player1,
-        Player2,
+        user,
+        pc,
         defaultPos,
         isFinished
     }

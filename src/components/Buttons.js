@@ -5,7 +5,7 @@ const Buttons = (props) => {
 
     const sizeButton = (shipSize > 1) ? <button>Ship size: {shipSize}</button>: null;
     const directionButton = (started) ? null : <button onClick={changeDirection}>{direction}</button>;
-    const restartButton = <button onClick={restartGame}>Restart</button>
+    const restartButton = <button onClick={() => restartGame()}>Restart</button>
 
     return (
         <div className='buttons'>
