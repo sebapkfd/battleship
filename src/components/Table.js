@@ -12,12 +12,9 @@ const Table = (props) => {
         return placeFleets(pos);
     }
 
-    const boxArray = [];
-    const boxValues = {attack, tableName}
-    for (let i = 0; i < 100; i++) {
-        let newBox = <Box key={i} values={{...boxValues, id: i}}/>
-        boxArray.push(newBox);
-    }
+    const boxArray = [...Array(100)].map((item, i) => {
+        return <Box key={i} values={{attack, tableName, id: i}}/>
+    })
 
     return (
         <div>
