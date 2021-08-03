@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Game from '../factories/Game';
 import BoardInfo from './BoardInfo';
 import Tables from './Tables';
+import displayShips from './displayShips';
 
 const Board = () => {
     const [newGame, setNewGame] = useState(Game());
@@ -60,29 +61,6 @@ const Board = () => {
         updateAlive('User');
         displayWinner();
         return attackHit;
-    }
-
-    const displayShips = (size, id, dir) => {
-        //move to another modules
-       let boxAttacked;
-       if(dir === 'horizontal') {
-           const lastPos = parseInt(id) + size - 1;
-           for(let i = id; i <= lastPos; i++) {
-               boxAttacked = document.getElementById(`User${i}`);
-               if (boxAttacked.className !== 'box-selected') {
-                   boxAttacked.className = 'box-selected';
-                }
-            }
-       }
-       else if(dir ==='vertical') {
-           const lastPos = id + (size-1)*10;
-           for(let i = id; i <= lastPos; i+= 10) {
-               boxAttacked = document.getElementById(`User${i}`);
-               if (boxAttacked.className !== 'box-selected') {
-                   boxAttacked.className = 'box-selected';
-                }
-            }
-        }
     }
 
     const placeFleets = (id) => {
