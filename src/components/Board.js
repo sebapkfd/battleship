@@ -5,9 +5,8 @@ import Tables from './Tables';
 import displayShips from './displayShips';
 
 const Board = () => {
-    const [newGame, setNewGame] = useState(Game());
-    const { user, pc } = newGame;
-    const [started, setStarted] = useState(false);
+    const [gamePlay, setGamePlay] = useState(Game());
+    const { user, pc, started } = gamePlay;
     const [resetKey, setResetKey] = useState(0);
     const [shipSize, setShipSize] = useState(6);
     const [direction, setDirection] = useState('horizontal');
@@ -16,11 +15,10 @@ const Board = () => {
     const [pcAlive, setPcAlive] = useState(5);
 
     const restartGame = () => {
-        setNewGame(Game());
-        setStarted(false);
+        setGamePlay(Game());
         setResetKey(resetKey + 1);
         setShipSize(6);
-        setWinner(null);
+        setWinner(null);//To add to Game
         setUserAlive(5);
         setPcAlive(5);
     }
@@ -47,7 +45,7 @@ const Board = () => {
     }
 
     const turns = (pos) => {
-        if(newGame.isFinished() || !started) {
+        if(gamePlay.isFinished() || !started) {
             return null;
         }
         const attackHit = user.attack(pc.board, pos);
@@ -71,14 +69,14 @@ const Board = () => {
                 pc.randomPlace(shipSize);
                 updateShipsAlive();
                 if(shipSize === 2) {
-                    setStarted(true);
+                    setGamePlay({...gamePlay, started: true});
                 }
             }
         }
     }
 
     const displayWinner = () => {
-        if(newGame.isFinished() && started) {
+        if(gamePlay.isFinished() && started) {
             if(user.board.allSunk()) {
                 setWinner('Pc');
             }
