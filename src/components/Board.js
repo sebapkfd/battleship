@@ -11,10 +11,10 @@ const Board = () => {
     const [shipSize, setShipSize] = useState(6);
     const [direction, setDirection] = useState('horizontal');
     const [winner, setWinner] = useState(null);
-    const user = newGame.Player1;
-    const pc = newGame.Player2;
     const [userAlive, setUserAlive] = useState(5);
     const [pcAlive, setPcAlive] = useState(5);
+    const user = newGame.Player1;
+    const pc = newGame.Player2;
 
     const restartGame = () => {
         setNewGame(Game());
@@ -61,17 +61,16 @@ const Board = () => {
             result = pc.randomAttack(user.board);
         }
 
-        if(result.isHit === null){
-
-        }
-        let boxAttacked = document.getElementById(`User${result.mov}`);
-        if (result.isHit) {
-            boxAttacked.className = 'hit-box';
-            pc.setPossibleAttacks(result.mov);
-            pcTurn('combo');
-        }
-        else {
-            boxAttacked.className = 'no-hit-box';
+        if(result.isHit !== null){
+            let boxAttacked = document.getElementById(`User${result.mov}`);
+            if (result.isHit) {
+                boxAttacked.className = 'hit-box';
+                pc.setPossibleAttacks(result.mov);
+                pcTurn('combo');
+            }
+            else {
+                boxAttacked.className = 'no-hit-box';
+            }
         }
     }
 
