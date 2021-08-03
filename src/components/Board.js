@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import Table from './Table';
 import Game from '../factories/Game';
-import Buttons from './Buttons';
-import Result from './Result';
+import BoardInfo from './BoardInfo';
+import Tables from './Tables';
 
 const Board = () => {
     const [newGame, setNewGame] = useState(Game());
+    const { user, pc } = newGame;
     const [started, setStarted] = useState(false);
     const [resetKey, setResetKey] = useState(0);
     const [shipSize, setShipSize] = useState(6);
@@ -13,7 +14,6 @@ const Board = () => {
     const [winner, setWinner] = useState(null);
     const [userAlive, setUserAlive] = useState(5);
     const [pcAlive, setPcAlive] = useState(5);
-    const {user, pc } = newGame;
 
     const restartGame = () => {
         setNewGame(Game());
@@ -21,8 +21,8 @@ const Board = () => {
         setResetKey(resetKey + 1);
         setShipSize(6);
         setWinner(null);
-        setUserAlive(4);
-        setPcAlive(4);
+        setUserAlive(5);
+        setPcAlive(5);
     }
 
     const changeDirection = () => {
@@ -139,27 +139,16 @@ const Board = () => {
         return false;
     }
     
-    const instruction = (started) ? <h3>Attack the enemy</h3>: <h3> Place your ships on the Board</h3>;
     const buttonValues = {shipSize, started, direction, changeDirection, restartGame};
     const tableValues = {turns, placeFleets, started};
     const userValues = {tableName: 'User', status: userAlive};
     const pcValues = {tableName: 'Pc', status: pcAlive};
-    const pcTable = (started) ? <Table key={`B${resetKey}`} values={{...tableValues, ...pcValues}}/> : null;
+    const gameValues = {started, resetKey, tableValues, pcValues, userValues};
 
     return (
         <div className='board'>
-            <div className = 'buttons-ins'>
-                {instruction}
-                <Buttons values={buttonValues} />
-                <Result winner={winner} />
-            </div>
-            <div className='tables-display'>
-                <Table
-                    key={`A${resetKey}`}
-                    values={{...tableValues, ...userValues}}
-                />
-                {pcTable}
-            </div>
+            <BoardInfo values={{started, buttonValues, winner}} />
+            <Tables values={gameValues} />
         </div>
     )
 }
