@@ -7,13 +7,8 @@ const Box = (props) => {
     const handleClick = () => {
         if(tableName === 'Pc'){
             const attackResult = attack(id);
-            if (attackResult === null) {
-            }
-            else if(attackResult) {
-                setBoxType('hit-box');
-            }
-            else if(!attackResult) {
-                setBoxType('no-hit-box');
+            if (attackResult !== null) {
+                (attackResult) ? setBoxType('hit-box') : setBoxType('no-hit-box');
             }
             return
         }
