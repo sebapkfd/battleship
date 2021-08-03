@@ -72,6 +72,26 @@ const Player = () => {
         return isHit;
     }
 
+    const turn = (mode, userBoard) => {
+        let result = (mode === 'combo' || possibleAttacks.length > 0) ? (
+            combo(userBoard)
+        ) : (
+            randomAttack(userBoard)
+        )
+
+        if(result.isHit !== null){
+            let boxAttacked = document.getElementById(`User${result.mov}`);
+            if (result.isHit) {
+                boxAttacked.className = 'hit-box';
+                setPossibleAttacks(result.mov);
+                turn('combo', userBoard);
+            }
+            else {
+                boxAttacked.className = 'no-hit-box';
+            }
+        }
+    }
+
     const User = {
         board,
         possibleAttacks,
@@ -79,7 +99,8 @@ const Player = () => {
         randomPlace,
         attack,
         combo,
-        setPossibleAttacks
+        setPossibleAttacks,
+        turn
     }
 
     return User;

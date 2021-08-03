@@ -45,44 +45,25 @@ const Board = () => {
         }
     }
 
-    const pcTurn = (mode) => {
-        let result = (mode === 'combo' || pc.possibleAttacks.length > 0) ? (
-            pc.combo(user.board)
-        ) : (
-            pc.randomAttack(user.board)
-        )
-
-        if(result.isHit !== null){
-            let boxAttacked = document.getElementById(`User${result.mov}`);
-            if (result.isHit) {
-                boxAttacked.className = 'hit-box';
-                pc.setPossibleAttacks(result.mov);
-                pcTurn('combo');
-            }
-            else {
-                boxAttacked.className = 'no-hit-box';
-            }
-        }
-    }
-
     const turns = (pos) => {
-        if(newGame.isFinished() || !started){
+        if(newGame.isFinished() || !started) {
             return null;
         }
         const attackHit = user.attack(pc.board, pos);
-        updateAlive('Pc')
+        updateAlive('Pc');
         if(attackHit === null) {
             return null;
         }
         else if(!attackHit) {
-            pcTurn('random');
+            pc.turn('random', user.board)
         }
-        updateAlive('User')
+        updateAlive('User');
         displayWinner();
         return attackHit;
     }
 
     const displayShips = (size, id, dir) => {
+        //move to another modules
        let boxAttacked;
        if(dir === 'horizontal') {
            const lastPos = parseInt(id) + size - 1;
