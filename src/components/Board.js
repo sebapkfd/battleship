@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import Table from './Table';
 import Game from '../factories/Game';
 import BoardInfo from './BoardInfo';
 import Tables from './Tables';
@@ -26,12 +25,7 @@ const Board = () => {
     }
 
     const changeDirection = () => {
-        if(direction === 'horizontal') {
-            setDirection('vertical');
-        }
-        else {
-            setDirection('horizontal');
-        }
+        (direction === 'horizontal') ? setDirection('vertical') : setDirection('horizontal');
     }
 
     const updateShipsAlive = () => {
@@ -52,13 +46,11 @@ const Board = () => {
     }
 
     const pcTurn = (mode) => {
-        let result;
-        if (mode === 'combo' || pc.possibleAttacks.length > 0) {
-            result = pc.combo(user.board);
-        }
-        else {
-            result = pc.randomAttack(user.board);
-        }
+        let result = (mode === 'combo' || pc.possibleAttacks.length > 0) ? (
+            pc.combo(user.board)
+        ) : (
+            pc.randomAttack(user.board)
+        )
 
         if(result.isHit !== null){
             let boxAttacked = document.getElementById(`User${result.mov}`);
