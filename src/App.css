@@ -17,11 +17,15 @@ h2 {
   margin: 10px 0 0 0;
 }
 
-.table-name,
-.table-status,
-.title {
+.title,
+.table-info {
   display: flex;
   justify-content: center;
+}
+
+.table-info {
+  flex-direction: column;
+  align-items: center;
 }
 
 .buttons-ins {

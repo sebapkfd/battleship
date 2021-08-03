@@ -151,8 +151,8 @@ const Board = () => {
         <div className='board'>
             <div className = 'buttons-ins'>
                 {instruction}
-                <Buttons values={buttonValues}/>
-                <Result winner={winner}/>
+                <Buttons values={buttonValues} />
+                <Result winner={winner} />
             </div>
             <div className='tables-display'>
                 <Table
