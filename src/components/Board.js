@@ -6,11 +6,10 @@ import displayShips from './displayShips';
 
 const Board = () => {
     const [gamePlay, setGamePlay] = useState(Game());
-    const { user, pc, started } = gamePlay;
+    const { user, pc, started, winner } = gamePlay;
     const [resetKey, setResetKey] = useState(0);
     const [shipSize, setShipSize] = useState(6);
     const [direction, setDirection] = useState('horizontal');
-    const [winner, setWinner] = useState(null);
     const [userAlive, setUserAlive] = useState(5);
     const [pcAlive, setPcAlive] = useState(5);
 
@@ -18,7 +17,6 @@ const Board = () => {
         setGamePlay(Game());
         setResetKey(resetKey + 1);
         setShipSize(6);
-        setWinner(null);//To add to Game
         setUserAlive(5);
         setPcAlive(5);
     }
@@ -78,10 +76,10 @@ const Board = () => {
     const displayWinner = () => {
         if(gamePlay.isFinished() && started) {
             if(user.board.allSunk()) {
-                setWinner('Pc');
+                setGamePlay({...gamePlay, winner: 'Pc'});
             }
             else if(pc.board.allSunk()) {
-                setWinner('User');
+                setGamePlay({...gamePlay, winner: 'User'});
             }
             return true;
         }
