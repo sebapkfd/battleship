@@ -51,9 +51,7 @@ const Board = () => {
         if(attackHit === null) {
             return null;
         }
-        else if(!attackHit) {
-            pc.turn('random', user.board)
-        }
+        pc.turn('random', user.board)
         updateAlive('User');
         displayWinner();
         return attackHit;

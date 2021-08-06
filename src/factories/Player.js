@@ -84,7 +84,6 @@ const Player = () => {
             if (result.isHit) {
                 boxAttacked.className = 'hit-box';
                 setPossibleAttacks(result.mov);
-                turn('combo', userBoard);
             }
             else {
                 boxAttacked.className = 'no-hit-box';
