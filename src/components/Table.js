@@ -2,9 +2,8 @@ import React from 'react';
 import Box from './Box';
 import TableInfo from './TableInfo'
 
-const Table = (props) => {
-    const {turns, placeFleets, started, tableName, status} = props.values;
-
+const Table = ({ values: {turns, placeFleets, started, tableName, status} }) => {
+    
     const attack = (pos) => {
         return (tableName === 'Pc') ? turns(pos) : placeFleets(pos);
     }

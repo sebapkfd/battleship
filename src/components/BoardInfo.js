@@ -1,8 +1,7 @@
 import Buttons from "./Buttons";
 import Result from "./Result";
 
-const BoardInfo = (props) => {
-    const { started, buttonValues, winner } = props.values;
+const BoardInfo = ({ values: {started, buttonValues, winner} }) => {
     const instruction = (started) ? <h3>Attack the enemy</h3>: <h3> Place your ships on the Board</h3>;
 
     return (

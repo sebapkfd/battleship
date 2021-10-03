@@ -1,7 +1,6 @@
 import React from 'react';
 
-const Result = (props) => {
-    const {winner} = props;
+const Result = ({ winner }) => {
     const message = (winner) ? <h3>{winner} Wins!</h3>: null;
 
     return (

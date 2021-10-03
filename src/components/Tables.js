@@ -1,7 +1,6 @@
 import Table from "./Table";
 
-const Tables = (props) => {
-    const { started, resetKey, tableValues, pcValues, userValues} = props.values;
+const Tables = ({ values: {started, resetKey, tableValues, pcValues, userValues}}) => {
     const pcTable = (started) ? <Table key={`B${resetKey}`} values={{...tableValues, ...pcValues}}/> : null;
 
     return (
